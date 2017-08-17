@@ -1,5 +1,56 @@
+;(function(){
+	if (!Array.prototype.forEach) {
+
+  Array.prototype.forEach = function (callback, thisArg) {
+
+    var T, k;
+
+    if (this == null) {
+      throw new TypeError(' this is null or not defined');
+    }
+
+    var O = Object(this);
+
+    var len = O.length >>> 0;
+
+    if (typeof callback !== 'function') {
+        throw new TypeError(callback + ' is not a function');
+    }
+
+    if (arguments.length > 1) {
+      T = thisArg;
+    }
+
+    k = 0;
+
+    while (k < len) {
+
+      var kValue;
+
+      if (k in O) {
+
+        kValue = O[k];
+
+        callback.call(T, kValue, k, O);
+      }
+
+      k++;
+    }
+
+  };
+}
+	
+})()
+
+
+
+
+
+
 var doc = document,
-    toArrayByClassName = nodes => [].slice.call(doc.getElementsByClassName(nodes)),
+    toArrayByClassName = function toArrayByClassName(nodes) {
+  return [].slice.call(doc.getElementsByClassName(nodes))
+},
     header = doc.getElementById('header'),
     prev = document.getElementById('prev'),
     next = document.getElementById('next'),
@@ -11,7 +62,7 @@ var doc = document,
     slides = toArrayByClassName('slide');
 
 
-
+console.log('work');
 /**
  *@param {object} settings, properties: prev/next(button objects), slides (slide, usually 'LI' element)
  */
@@ -22,8 +73,12 @@ var slider = (function(settings) {
         slideIndex = 1,
         slideClick;
 
-    /*closure*/
-    var wrapper = n => slideClick = () => slideRender(slideIndex += n);
+    /*closure*/	
+	var wrapper = function wrapper(n) {
+  return slideClick = function slideClick() {
+    return slideRender(slideIndex += n);
+  };
+};
 
 
     settings.prev.addEventListener('click', wrapper(-1));
