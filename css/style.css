@@ -163,6 +163,7 @@ body {
   -webkit-perspective: 1px;
           perspective: 1px;
   height: 110vh;
+  min-height:900px;
   z-index: 0;
   background-image: url("https://livedemo00.template-help.com/wordpress_51770/wp-content/themes/theme51770/images/body-img.jpg");
   padding-top: 200px;
