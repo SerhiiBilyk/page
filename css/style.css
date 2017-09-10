@@ -639,7 +639,9 @@ footer {
     padding-top: 300px;
     background-attachment: local;
     padding-top: 10px;
-    height: 60vh; }
+    height: 60vh;
+    min-height:auto;
+  }
     .parallax.second .slider {
       padding-right: 30px;
       padding-left: 30px; }
